@@ -1,0 +1,16 @@
+- select without limit                        检测查询是否有LIMIT，没有LIMIT不允许执行，最大500
+- storage engines                             检测允许的存储引擎列表
+- table comment                               检测表是否有说明
+- table charset                               检测允许的字符集
+- table collation                             检测允许的排序规则
+- autoincrment pk                             检测自增主键
+- pk                                          检测主键，仅当上面规则禁用时检测
+- column comment                              检测列是否有注释
+- column charset                              检测允许的字符集
+- column collation                            检测允许的排序规则
+- max fixed string length                     最大允许的定长字符长度
+- one timestamp one table                     一个表值允许出现一个TIMESTAMP列
+- mixed dml & ddl                             是否允许DDL&DML出现在一个工单中
+- index limitation, at most 3 indexes a table 限制一个表最大允许的索引数
+- index column limitation                     限制一个索引能够索引的最大列数
+- consoliation multiple table alter           合并同一个表的多条修改
