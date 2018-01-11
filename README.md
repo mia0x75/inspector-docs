@@ -1,7 +1,7 @@
 ## SQL查询审核系统
 
 ### 系统结构的初步设想：
-![image](http://oi64.tinypic.com/t0k9pv.jpg)
+![image](http://oi68.tinypic.com/1589zkx.jpg)
 
 ### 系统角色说明：
 
