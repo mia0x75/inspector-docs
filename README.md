@@ -23,7 +23,8 @@
 | rules      | 系统自动化审核规则表                     |
 | roles      | 系统角色                                 |
 | taxonomies | 分类信息                                 |
-| relations  | 记录系统一对一、一对多和多对多关系       |
+| relations  | 记录系统一对多和多对多关系               |
+| slaves     | 从库信息                                 |
 | stats      | 统计信息，用于着陆页看板                 |
 
 ### 表结构说明
@@ -37,12 +38,29 @@
 | 列名          | 允许空    | 默认值    | 键 | 类型              | 说明     |
 |:--------------|:----------|:----------|:---|:------------------|:---------|
 | server_id     | 否        | 无        | PK | INT UNSIGNED      | 自增主键 |
-| host          | 是        | 无        |    | INT UNSIGNED      | 主机地址 |
-| port          | 是        | 3306      |    | SMALLINT UNSIGNED | 端口     |
-| user          | 是        | review    |    | VARCHAR(15)       | 连接用户 |
-| password      | 是        | 无        |    | VARCHAR(100)      | 密码     |
-| status        | 是        | 1         |    | TINYINT UNSIGNED  | 状态     |
-| creation_date | 是        | NOW()     |    | DATETIME          | 创建时间 |
+| host          | 否        | 无        |    | INT UNSIGNED      | 主机地址 |
+| port          | 否        | 3306      |    | SMALLINT UNSIGNED | 端口     |
+| user          | 否        | review    |    | VARCHAR(15)       | 连接用户 |
+| password      | 否        | 无        |    | VARCHAR(100)      | 密码     |
+| status        | 否        | 1         |    | TINYINT UNSIGNED  | 状态     |
+| creation_date | 否        | NOW()     |    | DATETIME          | 创建时间 |
+
+#### 表名：slaves
+* 用途描述：从库服务器及登录信息，仅支持一级主从关系，如果配置有从库，那么查询发送到从库执行，同时考虑集成gh-ost工具
+* 存储引擎：InnoDB
+* 字符集：　utf8mb4
+* 排序规则：utf8mb4_unicode_ci
+
+| 列名          | 允许空    | 默认值    | 键 | 类型              | 说明     |
+|:--------------|:----------|:----------|:---|:------------------|:---------|
+| slave_id      | 否        | 无        | PK | INT UNSIGNED      | 自增主键 |
+| server_id     | 否        | 无        |    | INT UNSIGNED      | 对应主库 |
+| host          | 否        | 无        |    | INT UNSIGNED      | 主机地址 |
+| port          | 否        | 3306      |    | SMALLINT UNSIGNED | 端口     |
+| user          | 否        | review    |    | VARCHAR(15)       | 连接用户 |
+| password      | 否        | 无        |    | VARCHAR(100)      | 密码     |
+| status        | 否        | 1         |    | TINYINT UNSIGNED  | 状态     |
+| creation_date | 否        | NOW()     |    | DATETIME          | 创建时间 |
 
 #### 表名：users
 * 用途描述：用户列表，密码采用哈希存储
@@ -62,7 +80,7 @@
 | creation_date | 否        | NOW()     |    | DATETIME          | 创建时间 |
 
 #### 表名：tickets
-* 用途描述：工单列表
+* 用途描述：工单列表，有待进一步细化
 * 存储引擎：InnoDB
 * 字符集：　utf8mb4
 * 排序规则：utf8mb4_unicode_ci
@@ -90,7 +108,7 @@
 | value     | 否        | 无        |    | TINYTEXT          | 配置值   |
 
 #### 表名：rules
-* 用途描述：审核规则配置
+* 用途描述：审核规则配置，需要进一步细化
 * 存储引擎：InnoDB
 * 字符集：　utf8mb4
 * 排序规则：utf8mb4_unicode_ci
@@ -104,7 +122,7 @@
 | mandatory   | 否        | 无        |    | TINYINT UNSIGNED  | 是否强制 |
 
 #### 表名：roles
-* 用途描述：系统角色
+* 用途描述：系统角色，内置角色，不可更改
 * 存储引擎：InnoDB
 * 字符集：　utf8mb4
 * 排序规则：utf8mb4_unicode_ci
@@ -113,10 +131,10 @@
 |:------------|:----------|:----------|:---|:------------------|:---------|
 | role_id     | 否        | 无        | PK | INT UNSIGNED      | 自增主键 |
 | name        | 否        | 无        |    | VARCHAR(25)       | 角色名称 |
-| description | 否        | 无        |    | VARCHAR(75)       | 描述     |
+| description | 是        | 无        |    | VARCHAR(75)       | 描述     |
 
 #### 表名：relations
-* 用途描述：记录系统一对一和一对多关系
+* 用途描述：记录系统一对多和多对多关系
 * 存储引擎：InnoDB
 * 字符集：　utf8mb4
 * 排序规则：utf8mb4_unicode_ci
@@ -142,7 +160,7 @@
 | description | 是        | 无        |    | VARCHAR(75)       | 分类描述 |
 
 #### 表名：stats
-* 用途描述：统计信息，用于着陆页看板
+* 用途描述：统计信息，用于着陆页看板，需要进一步细化
 * 存储引擎：InnoDB
 * 字符集：　utf8mb4
 * 排序规则：utf8mb4_unicode_ci
