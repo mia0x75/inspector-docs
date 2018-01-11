@@ -88,15 +88,16 @@
 * 字符集：　utf8mb4
 * 排序规则：utf8mb4_unicode_ci
 
-| 列名        | 允许空    | 默认值    | 键 | 类型              | 说明     |
-|:------------|:----------|:----------|:---|:------------------|:---------|
-| ticket_id   | 否        | 无        | PK | INT UNSIGNED      | 自增主键 |
-| server_id   | 否        | 无        |    | INT UNSIGNED      | 目标机器 |
-| subject     | 否        | 无        |    | VARCHAR(50)       | 主题     |
-| content     | 否        | 无        |    | TEXT              | 更新语句 |
-| user_id     | 否        | 无        |    | INT UNSIGNED      | 提交人   |
-| reviewer_id | 否        | 无        |    | INT UNSIGNED      | 审核人   |
-| status      | 否        | 无        |    | TINYINT UNSIGNED  | 状态     |
+| 列名          | 允许空    | 默认值    | 键 | 类型              | 说明     |
+|:--------------|:----------|:----------|:---|:------------------|:---------|
+| ticket_id     | 否        | 无        | PK | INT UNSIGNED      | 自增主键 |
+| server_id     | 否        | 无        |    | INT UNSIGNED      | 目标机器 |
+| subject       | 否        | 无        |    | VARCHAR(50)       | 主题     |
+| content       | 否        | 无        |    | TEXT              | 更新语句 |
+| user_id       | 否        | 无        |    | INT UNSIGNED      | 提交人   |
+| reviewer_id   | 否        | 无        |    | INT UNSIGNED      | 审核人   |
+| status        | 否        | 无        |    | TINYINT UNSIGNED  | 状态     |
+| creation_date | 否        | NOW()     |    | DATETIME          | 创建时间 |
 
 #### 表名：options
 * 用途描述：系统选项，建值对
