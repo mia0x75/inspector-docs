@@ -1,0 +1,11 @@
+CREATE TABLE `relations`
+(
+	`relation_id`   INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	`taxonomy_id`   INT UNSIGNED NOT NULL,
+	`ancestor_id`   INT UNSIGNED NOT NULL,
+	`descendant_id` INT UNSIGNED NOT NULL,
+	`creation_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+	PRIMARY KEY (`relation_id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4;

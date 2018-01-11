@@ -1,0 +1,14 @@
+CREATE TABLE `slaves`
+(
+	`slave_id`      INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	`server_id`     INT UNSIGNED NOT NULL,
+	`host`          INT UNSIGNED NOT NULL,
+	`port`          SMALLINT UNSIGNED NOT NULL,
+	`user`          VARCHAR(25) NOT NULL,
+	`password`      VARCHAR(75) NOT NULL,
+	`status`        TINYINT UNSIGNED NOT NULL DEFAULT 1,
+	`creation_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+	PRIMARY KEY (`slave_id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4;

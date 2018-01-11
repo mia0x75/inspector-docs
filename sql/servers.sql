@@ -1,0 +1,12 @@
+CREATE TABLE `servers` (
+	`server_id`     INT UNSIGNED NOT NULL AUTO_INCREMENT,
+	`host`          INT UNSIGNED NOT NULL,
+	`port`          SMALLINT UNSIGNED NOT NULL,
+	`user`          VARCHAR(25) NOT NULL,
+	`password`      VARCHAR(75) NOT NULL,
+	`status`        TINYINT UNSIGNED NOT NULL DEFAULT 1,
+	`creation_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+	PRIMARY KEY (`server_id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4;
