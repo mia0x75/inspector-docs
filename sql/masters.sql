@@ -1,13 +1,13 @@
-CREATE TABLE `servers` (
-   `server_id`     INT UNSIGNED NOT NULL AUTO_INCREMENT
+CREATE TABLE `masters` (
+   `master_id`     INT UNSIGNED NOT NULL AUTO_INCREMENT
                    COMMENT '自增主键',
    `host`          INT UNSIGNED NOT NULL
                    COMMENT '主机地址',
    `port`          SMALLINT UNSIGNED NOT NULL
                    COMMENT '端口',
-   `user`          VARCHAR(25) NOT NULL
+   `user`          BINARY(48) NOT NULL
                    COMMENT '连接用户',
-   `password`      VARCHAR(75) NOT NULL
+   `password`      BINARY(48) NOT NULL
                    COMMENT '密码',
    `status`        TINYINT UNSIGNED NOT NULL DEFAULT 1
                    COMMENT '状态',

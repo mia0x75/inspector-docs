@@ -2,7 +2,7 @@ CREATE TABLE `tickets`
 (
    `ticket_id`     INT UNSIGNED NOT NULL AUTO_INCREMENT
                    COMMENT '自增主键',
-   `server_id`     INT UNSIGNED NOT NULL
+   `master_id`     INT UNSIGNED NOT NULL
                    COMMENT '目标机器',
    `subject`       VARCHAR(50) NOT NULL
                    COMMENT '主题',

@@ -19,7 +19,7 @@
 
 | 表名       | 说明                                     |
 |:-----------|:-----------------------------------------|
-| servers    | 服务器及登录信息，用户和密码采用加密存储 |
+| masters    | 服务器及登录信息，用户和密码采用加密存储 |
 | users      | 用户列表，密码采用哈希存储               |
 | tickets    | 工单列表                                 |
 | options    | 系统选项，建值对                         |
@@ -32,7 +32,7 @@
 
 ### 表结构说明
 
-#### 表名：servers
+#### 表名：masters
 * 用途描述：服务器及登录信息，用户和密码采用加密存储
 * 存储引擎：InnoDB
 * 字符集：　utf8mb4
@@ -40,11 +40,11 @@
 
 | 列名          | 允许空    | 默认值    | 键 | 类型              | 说明     |
 |:--------------|:----------|:----------|:---|:------------------|:---------|
-| server_id     | 否        | 无        | PK | INT UNSIGNED      | 自增主键 |
+| master_id     | 否        | 无        | PK | INT UNSIGNED      | 自增主键 |
 | host          | 否        | 无        |    | INT UNSIGNED      | 主机地址 |
 | port          | 否        | 3306      |    | SMALLINT UNSIGNED | 端口     |
-| user          | 否        | review    |    | VARCHAR(15)       | 连接用户 |
-| password      | 否        | 无        |    | VARCHAR(100)      | 密码     |
+| user          | 否        | 无        |    | VARBINARY(48)     | 连接用户 |
+| password      | 否        | 无        |    | VARBINARY(48)     | 密码     |
 | status        | 否        | 1         |    | TINYINT UNSIGNED  | 状态     |
 | creation_date | 否        | NOW()     |    | DATETIME          | 创建时间 |
 
@@ -57,11 +57,11 @@
 | 列名          | 允许空    | 默认值    | 键 | 类型              | 说明     |
 |:--------------|:----------|:----------|:---|:------------------|:---------|
 | slave_id      | 否        | 无        | PK | INT UNSIGNED      | 自增主键 |
-| server_id     | 否        | 无        |    | INT UNSIGNED      | 对应主库 |
+| master_id     | 否        | 无        |    | INT UNSIGNED      | 对应主库 |
 | host          | 否        | 无        |    | INT UNSIGNED      | 主机地址 |
 | port          | 否        | 3306      |    | SMALLINT UNSIGNED | 端口     |
-| user          | 否        | review    |    | VARCHAR(15)       | 连接用户 |
-| password      | 否        | 无        |    | VARCHAR(100)      | 密码     |
+| user          | 否        | 无        |    | VARBINARY(48)     | 连接用户 |
+| password      | 否        | 无        |    | VARBINARY(48)     | 密码     |
 | status        | 否        | 1         |    | TINYINT UNSIGNED  | 状态     |
 | creation_date | 否        | NOW()     |    | DATETIME          | 创建时间 |
 
@@ -75,7 +75,7 @@
 |:--------------|:----------|:----------|:---|:------------------|:---------|
 | user_id       | 否        | 无        | PK | INT UNSIGNED      | 自增主键 |
 | login         | 否        | 无        |    | VARCHAR(25)       | 登录名称 |
-| password      | 否        | 无        |    | CHAR(64)          | 密码     |
+| password      | 否        | 无        |    | BINARY(48)        | 密码     |
 | status        | 否        | 1         |    | TINYINT UNSIGNED  | 状态     |
 | name          | 否        | 无        |    | VARCHAR(25)       | 真实名称 |
 | email         | 否        | 无        |    | VARCHAR(75)       | 电子邮件 |
@@ -91,7 +91,7 @@
 | 列名          | 允许空    | 默认值    | 键 | 类型              | 说明     |
 |:--------------|:----------|:----------|:---|:------------------|:---------|
 | ticket_id     | 否        | 无        | PK | INT UNSIGNED      | 自增主键 |
-| server_id     | 否        | 无        |    | INT UNSIGNED      | 目标机器 |
+| master_id     | 否        | 无        |    | INT UNSIGNED      | 目标机器 |
 | subject       | 否        | 无        |    | VARCHAR(50)       | 主题     |
 | content       | 否        | 无        |    | TEXT              | 更新语句 |
 | user_id       | 否        | 无        |    | INT UNSIGNED      | 提交人   |

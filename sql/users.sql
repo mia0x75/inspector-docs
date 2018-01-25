@@ -4,7 +4,7 @@ CREATE TABLE `users`
                    COMMENT '自增主键',
    `login`         VARCHAR(25) NOT NULL
                    COMMENT '登录名称',
-   `password`      CHAR(64) NOT NULL
+   `password`      BINARY(48) NOT NULL
                    COMMENT '密码',
    `status`        TINYINT UNSIGNED NOT NULL DEFAULT 1
                    COMMENT '状态',
