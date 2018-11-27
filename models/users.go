@@ -2,18 +2,52 @@ package models
 
 import (
 	"time"
+
+	"github.com/go-xorm/xorm"
 )
 
-type User struct {
-	UserId       uint      `gorm:"column:user_id;not null;type:int unsigned;primary_key;auto_increment" valid:"required"`
-	Login        string    `gorm:"column:login;not null;type:varchar(25);unique;size:25" valid:"required,length(3|25),alpha"`
-	Password     []byte    `gorm:"column:password;not null;type:binary(48);size:48" valid:"required"` // SHA384
-	Name         string    `gorm:"column:name;not null;type:varchar(25);size:25" valid:"required"`
-	Email        string    `gorm:"column:email;not null;type:varchar(75);size:75" valid:"required,email"`
-	Status       uint8     `gorm:"column:status;not null;type:tinyint unsigned" valid:"required"`
-	Avator       string    `gorm:"column:avator;not null;type:varchar(75);size:75" valid:"required"`
-	CreationDate time.Time `gorm:"column:creation_date;type:datetime;not null" valid:"required"`
+//varchar(25) notnull unique 'usr_name'
+type Users struct {
+	UserId   uint   `xorm:"user_id notnull int pk autoincr"`                                                //
+	Email    string `xorm:"email notnull varchar(75) unique(unique_1)" valid:"required,email,length(3|75)"` //
+	Password string `xorm:"password notnull char(60)" valid:"required" json:"-"`                            //
+	Status   uint8  `xorm:"status notnull tinyint" valid:"required,matches(^(0|1)$)"`                       // 0 - 禁用 | 1 - 有效
+	Name     string `xorm:"name notnull varchar(25)" valid:"required,runelength(1|25)"`                     //
+	AvatarId string `xorm:"avatar_id notnull int" valid:"required,uint32"`                                  //
+	Version  int    `xorm:"version" json:"-"`                                                               //
+	UpdateAt uint   `xorm:"update_at notnull int" valid:"uint32"`                                           //
+	CreateAt uint   `xorm:"create_at notnull int" valid:"required,uint32"`                                  //
+}
 
-	Tickets        []Ticket `gorm:"ForeignKey:user_id;AssociationForeignKey:user_id"`
-	PendingTickets []Ticket `gorm:"ForeignKey:user_id;AssociationForeignKey:reviewer_id"`
+func (this *Users) TableName() string {
+	return "mm_users"
+}
+
+func (this *Users) BeforeInsert() {
+	this.CreateAt = uint(time.Now().Unix())
+}
+
+func (this *Users) BeforeUpdate() {
+	this.UpdateAt = uint(time.Now().Unix())
+}
+
+func (this *Users) AfterSet(colName string, _ xorm.Cell) {
+	switch colName {
+	case "created_unix":
+		// this.Created = time.Unix(this.CreatedUnix, 0).Local()
+	case "updated_unix":
+		// this.Updated = time.Unix(this.UpdatedUnix, 0).Local()
+	}
+}
+
+func (this *Users) GetTickets() {
+
+}
+
+func (this *Users) GetMasters() {
+
+}
+
+func (this *Users) GetReviewers() {
+
 }

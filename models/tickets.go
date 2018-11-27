@@ -2,15 +2,34 @@ package models
 
 import (
 	"time"
+
+	"github.com/go-xorm/xorm"
 )
 
-type Ticket struct {
-	TicketId     uint      `gorm:"column:ticket_id;not null;type:int unsigned;primary_key;auto_increment"`
-	MasterId     uint      `gorm:"column:master_id;not null;type:int unsigned"`
-	Subject      string    `gorm:"column:subject;not null;type:varchar(50);size:50"`
-	Content      string    `gorm:"column:content;not null;type:text;size:65535"`
-	UserId       uint      `gorm:"column:user_id;not null;type:int unsigned"`
-	ReviewerId   uint      `gorm:"column:reviewer_id;not null;type:int unsigned"`
-	Status       uint8     `gorm:"column:status;not null;type:int unsigned"`
-	CreationDate time.Time `gorm:"column:creation_date;type:datetime;not null"`
+type Tickets struct {
+	TicketId   uint   `xorm:"ticket_id notnull int pk autoincr"`                             //
+	Subject    string `xorm:"subject notnull varchar(50)" valid:"required,runelength(1|50)"` //
+	Content    string `xorm:"content notnull text" valid:"required,runelength(1|65535)"`     //
+	Status     uint8  `xorm:"status notnull int" valid:"required,matches(^([1-9]?[0-9])$)"`  // 状态 0-99
+	OwnerId    uint   `xorm:"owner_id notnull int" valid:"required,uint32"`                  //
+	InstanceId uint   `xorm:"instance_id notnull int" valid:"required,uint32"`               //
+	ReviewerId uint   `xorm:"reviewer_id notnull int" valid:"required,uint32"`               //
+	Version    int    `xorm:"version" json:"-"`                                              //
+	UpdateAt   uint   `xorm:"update_at notnull int" valid:"uint32"`                          //
+	CreateAt   uint   `xorm:"create_at notnull int" valid:"required,uint32"`                 //
+}
+
+func (this *Tickets) TableName() string {
+	return "mm_tickets"
+}
+
+func (this *Tickets) BeforeInsert() {
+	this.CreateAt = uint(time.Now().Unix())
+}
+
+func (this *Tickets) BeforeUpdate() {
+	this.UpdateAt = uint(time.Now().Unix())
+}
+
+func (this *Tickets) AfterSet(colName string, _ xorm.Cell) {
 }
