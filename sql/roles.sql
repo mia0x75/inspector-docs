@@ -25,3 +25,12 @@ COMMENT = '角色表'
 DEFAULT CHARSET = utf8mb4
 DEFAULT COLLATE = utf8mb4_general_ci;
 
+
+INSERT INTO `roles` (`name`, `description`, `version`, `create_at`) VALUES
+('root',      '系统管理员',         1, UNIX_TIMESTAMP()),
+('dba',       '高级审核',           1, UNIX_TIMESTAMP()),
+('reviewer',  '普通审核',           1, UNIX_TIMESTAMP()),
+('developer', '数据查询及工单提交', 1, UNIX_TIMESTAMP()),
+('viewer',    '查询用户',           1, UNIX_TIMESTAMP()),
+('guest',     '来宾账号',           1, UNIX_TIMESTAMP())
+;

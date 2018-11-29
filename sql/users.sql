@@ -34,3 +34,7 @@ COMMENT = '用户表'
 DEFAULT CHARSET = utf8mb4
 DEFAULT COLLATE = utf8mb4_general_ci;
 
+
+INSERT INTO `mm_users` (`email`, `password`, `status`, `name`, `avatar_id`, `version`, `create_at`) VALUES
+('root@localhost', '$2a$10$YARNH/Rs3XDY/fdsE02T/OsGFN5fcZydPG.KQAhklup6TVLjaQg82', 1, 'root', 1, 1, UNIX_TIMESTAMP())
+;

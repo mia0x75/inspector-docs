@@ -31,3 +31,24 @@ COMMENT = '配置表'
 DEFAULT CHARSET = utf8mb4
 DEFAULT COLLATE = utf8mb4_general_ci;
 
+INSERT INTO `options` (`group`, `name`, `value`, `description`, `version`, `create_at`) VALUES
+# 邮件
+('smtp', 'smtp.enabled',    'true', '', 1, UNIX_TIMESTAMP()),
+('smtp', 'smtp.host',       'true', '', 1, UNIX_TIMESTAMP()),
+('smtp', 'smtp.port',       'true', '', 1, UNIX_TIMESTAMP()),
+('smtp', 'smtp.user',       'true', '', 1, UNIX_TIMESTAMP()),
+('smtp', 'smtp.password',   'true', '', 1, UNIX_TIMESTAMP()),
+('smtp', 'smtp.encryption', 'none', '', 1, UNIX_TIMESTAMP()),
+
+# 认证
+('ldap', 'ldap.enabled',    'true', '', 1, UNIX_TIMESTAMP()),
+('ldap', 'ldap.host',       'true', '', 1, UNIX_TIMESTAMP()),
+('ldap', 'ldap.domain',     'true', '', 1, UNIX_TIMESTAMP()),
+('ldap', 'ldap.type',       'true', '', 1, UNIX_TIMESTAMP()),
+('ldap', 'ldap.user',       'true', '', 1, UNIX_TIMESTAMP()),
+('ldap', 'ldap.password',   'true', '', 1, UNIX_TIMESTAMP()),
+('ldap', 'ldap.sc',         'true', '', 1, UNIX_TIMESTAMP()),
+('ldap', 'ldap.ou',         'true', '', 1, UNIX_TIMESTAMP())
+
+;
+
