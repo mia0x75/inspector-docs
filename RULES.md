@@ -92,13 +92,13 @@
 | create-table-column-charsets                   | 字段允许的字符集               | in     | []                | [4,5,6,_7_]  | 2    | table-create | 新建表"%s"中的字段"%s"不允许使用字符集"%s"，请使用"%s"。                       |
 | create-table-column-collations                 | 字段允许的校验规则             | in     | []                | [4,5,6,_7_]  | 2    | table-create | 新建表"%s"中的字段"%s"不允许使用排序规则"%s"，请使用"%s"。                     |
 | create-table-charset-collation-match-on-column | 字段的字符集与校验规则必须匹配 | eq     | true              | [_5_]        | 2    | table-create | 新建表使用的字符集"%s"和排序规则"%s"不匹配，请查阅官方文档。                   |
-| create-table-column-type                       | 允许的字段类型                 | not in | [enum set bit]    | [4,5,6,_7_]  | 2    | table-create | 新建表"%s"中的字段"%s"中指定的字符集"%s"和排序规则"%s"不匹配，请参考官方文档。 |
+| create-table-column-type-disallowed            | 不允许的字段类型                 | not-in | [enum set bit]    | [4,5,6,_7_]  | 2    | table-create | 新建表"%s"中的字段"%s"中指定的字符集"%s"和排序规则"%s"不匹配，请参考官方文档。 |
 | create-table-column-regexp                     | 字段名必须符合命名规范         | regexp | \^[_a-zA-Z_]+$    | [4,_5_,6,7]  | 2    | table-create | 新建表"%s"中的字段使用的标识符"%s"不被规则允许，标识符需要满足正则"%s"。       |
 | create-table-dupli-column-name                 | 字段名是否重复                 | eq     | true              | [4,_5_,6,7]  | 2    | table-create | 新建表"%s"中的字段"%s"名称有重复。                                             |
 | create-table-maxcolumns                        | 表允许的字段个数，可配置       | lte    | 64                | [4,5,6,_7_]  | 2    | table-create | 新建表"%s"中定义%d个字段，字段数量超过允许的阈值%d。请考虑拆分表。             |
 | create-table-indices-key-not-name              | 索引必须命名                   | eq     | true              | [4,_5_,6,7]  | 2    | table-create | 新建表"%s"中有一个或多个索引没有提供索引名称。                                 |
 | create-table-indices-name-uppcase              | 索引名是否允许大写             | regexp | \^[_a-zA-Z_]+$    | [4,_5_,6,7]  | 2    | table-create | 新建表"%s"中的索引"%s"标识符中含有大写字母不被规则允许。                       |
-| create-table-indices-key-regexp                | 索引名必须符合命名规范         | regexp | \^index_%d+$      | [4,_5_,6,7]  | 2    | table-create | 新建表"%s"中的索引"%s"标识符不满足正则表达式"%s"。                             |
+| create-table-indices-key-regexp                | 索引名必须符合前缀规范         | regexp | \^index_%d+$      | [4,_5_,6,7]  | 2    | table-create | 新建表"%s"中的索引"%s"标识符不满足正则表达式"%s"。                             |
 | create-table-max-key-count                     | 表中最多可建多少个索引         | lte    | 5                 | [4,5,6,_7_]  | 2    | table-create | 新建表"%s"中定义了%d个索引，索引数量超过允许的阈值%d。                         |
 | create-table-unique-keys-not-name              | 唯一索引必须命名               | eq     | true              | [4,_5_,6,7]  | 2    | table-create | 新建表"%s"中有一个或多个唯一索引没有提供索引名称。                             |
 | create-table-unique-keys-regexp                | 唯一索引命名必须符合规范       | regexp | \^[_a-zA-Z_]+$    | [4,_5_,6,7]  | 2    | table-create | 新建表"%s"中的唯一索引"%s"标识符中含有大写字母不被规则允许。                   |
