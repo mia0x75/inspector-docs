@@ -109,7 +109,7 @@
 | create-table-incfield-ispk                     | 检查自增字段是否是主键         | eq     | true              | [4,_5_,6,7]  | 2    | table-create | 新建表"%s"中的自增字段"%s"不是主键。                                           |
 | create-table-notnull-default                   | 非空字段是否有默认值           | eq     | true              | [4,_5_,6,7]  | 2    | table-create | 新建表"%s"中的字段"%s"不允许为空，但没有指定默认值。                           |
 | create-table-as-select-enable                  | 是否允许create table as select | eq     | false             | [4,_5_,6,7]  | 2    | table-create | 当前规则不允许使用CREATE TABLE AS SELECT FROM的方式创建表。                    |
-| create-table-max-timestamp-count               | 允许多少个timestamp类型的字段  | lte    | 2                 | [4,5,6,_7_]  | 2    | table-create | 新建表"%s"中的定义了两个或者两个以上的TIMESTAMP类型字段，请改用DATETIME类型。  |
+| create-table-max-timestamp-count               | 允许多少个timestamp类型的字段  | lte    | 1                 | [4,5,6,_7_]  | 2    | table-create | 新建表"%s"中的定义了两个或者两个以上的TIMESTAMP类型字段，请改用DATETIME类型。  |
 | create-table-fk-enabled                        | 是否允许外键                   | eq     | false             | [4,_5_,6,7]  | 3    | table-create | 新建表"%s"中定义了外键"%s"，规则不允许。                                       |
 | create-table-fk-regexp                         | 外键名必须符合命名规范         | regexp | \^fk_[_a-z0-9]+ $ | [4,_5_,6,7]  | 3    | table-create | 新建表"%s"中定义外键"%s"名字不合法。                                           |
 | create-table-db-exists                         | 建表时检查目标库是否存在       | eq     | true              | [4,_5_,6,7]  | 3    | table-create | 要新建的表"%s"在实例"%s"的数据库"%s"不存在。                                   |
@@ -188,7 +188,7 @@
 | insert-without-explicit-columns-enabled | 是否允许不指定字段的insert        | eq     | false  | [4,_5_,6,7]  | 2    | data-insert | 当前规则不允许执行没有显式提供字段列表的INSERT语句。      |
 | insert-select-enabled                   | 是否允许insert                    | eq     | false  | [4,5,6,_7_]  | 2    | data-insert | 当前规则不允许执行INSERT ... SELECT ...语句。             |
 | insert-merge                            | 是否合并同表的单条insert          | eq     | true   | [4,_5_,6,7]  | 2    | data-insert | 多条INSERT语句需要合并成单条语句。                        |
-| insert-max-rows-limit                   | 单个insert 允许插入的最大行数     | eq     | 10000  | [4,5,6,_7_]  | 2    | data-insert | 一条INSERT语句不得操作超过%d条记录。                      |
+| insert-max-rows-limit                   | 单个insert 允许插入的最大行数     | lte    | 10000  | [4,5,6,_7_]  | 2    | data-insert | 一条INSERT语句不得操作超过%d条记录。                      |
 | insert-kv-match                         | insert时 字段类型、值类型是否匹配 | eq     | true   | [4,_5_,6,7]  | 2    | data-insert | INSERT语句的字段数量和值数量不匹配。                      |
 | insert-table-exists                     | 要插入的表是否存在                | eq     | true   | [4,_5_,6,7]  | 3    | data-insert | INSERT语句中指定的表"%s"在实例"%s"的数据库"%s"中不存在。  |
 | insert-db-exists                        | 要插入的表所属库是否存在          | eq     | true   | [4,_5_,6,7]  | 3    | data-insert | INSERT语句中指定的库"%s"在实例"%s"中不存在。              |
@@ -202,7 +202,7 @@
 |------------------------------------------|-----------------------------------|--------|--------|--------------|------|--------------|-----------------------------------------------------------|
 | replace-without-explicit-columns-enabled | 是否允许不指定字段的replac 语句   | eq     | false  | [4,_5_,6,7]  | 2    | data-replace | 当前规则不允许执行没有显式提供字段列表的REPLACE语句。     |
 | replace-select-enable                    | 是否允许replace into select       | eq     | false  | [4,_5_,6,7]  | 2    | data-replace | 当前规则不允许执行REPLACE ... SELECT ...语句。            |
-| replace-max-rows-limit                   | 单次replace允许的最大行数         | eq     | 10000  | [4,5,6,_7_]  | 2    | data-replace | 一条REPLACE语句不得操作超过%d条记录。                     |
+| replace-max-rows-limit                   | 单次replace允许的最大行数         | lte    | 10000  | [4,5,6,_7_]  | 2    | data-replace | 一条REPLACE语句不得操作超过%d条记录。                     |
 | replace-kv-match                         | replace时字段类型、值类型是否匹配 | eq     | ture   | [4,_5_,6,7]  | 2    | data-replace | REPLACE语句的字段数量和值数量不匹配。                     |
 | replace-db-exists                        | replace时检查db是否存在           | eq     | true   | [4,_5_,6,7]  | 3    | data-replace | REPLACE语句中指定的库"%s"在实例"%s"中不存在。             |
 | replace-table-exists                     | replace into 的表是否存在         | eq     | true   | [4,_5_,6,7]  | 3    | data-replace | REPLACE语句中指定的表"%s"在实例"%s"的数据库"%s"中不存在。 |
@@ -218,7 +218,7 @@
 | update-table_exists                 | update的表是否存在             | eq     | true   | [4,_5_,6,7]  | 3    | data-update | 更新语句中指定的表"%s"在实例"%s"的数据库"%s"中不存在。 |
 | update-fields-exists                | update的字段是否存在           | eq     | true   | [4,_5_,6,7]  | 3    | data-update | 更新语句中待更新的字段"%s"不存在。                     |
 | update-where-fields_exists          | where条件中的字段是否存在      | eq     | true   | [4,_5_,6,7]  | 3    | data-update | 更新语句中WHERE从句中的字段"%s"在源表中不存在。        |
-| update-maxrows_limit                | 允许单次更新的最大行数         | eq     | 10000  | [4,5,6,_7_]  | 3    | data-update | 当前规则不允许一次更新%d条或以上记录。                 |
+| update-maxrows_limit                | 允许单次更新的最大行数         | lte    | 10000  | [4,5,6,_7_]  | 3    | data-update | 当前规则不允许一次更新%d条或以上记录。                 |
 
 
 ### delete data
@@ -226,7 +226,7 @@
 | 规则名称                            | 规则说明                       | 比较符 | 设定值 | 权限         | 层级 | 分组        | 错误信息                                             |
 |-------------------------------------|--------------------------------|--------|--------|--------------|------|-------------|------------------------------------------------------|
 | delete-without-where-clause-enabled | 是否允许没有where条件的delete  | eq     | false  | [4,_5_,6,7]  | 2    | data-delete | 当前规则不允许执行没有WHERE从句的删除语句。          |
-| delete-maxrows-limit                | 允许单次删除的最大行数         | eq     | 10000  | [4,5,6,_7_]  | 3    | data-delete | 当前规则不允许一次删除%d条或以上记录。               |
+| delete-maxrows-limit                | 允许单次删除的最大行数         | lte    | 10000  | [4,5,6,_7_]  | 3    | data-delete | 当前规则不允许一次删除%d条或以上记录。               |
 | delete-db-exists                    | delete的表所属库是否存在       | eq     | true   | [4,_5_,6,7]  | 3    | data-delete | 删除语句中指的库"%s"在实例"%s"中不存在。             |
 | delete-table-exists                 | delete的表是否存在             | eq     | true   | [4,_5_,6,7]  | 3    | data-delete | 删除语句中指的表"%s"在实例"%s"的数据库"%s"中不存在。 |
 | delete-where-field-exists           | where条件中的字段是否存在      | eq     | true   | [4,_5_,6,7]  | 3    | data-delete | 删除语句中WHERE从句中的字段"%s"在源表中不存在。      |
@@ -366,7 +366,7 @@
 | create-procedure-enable         | 是否允许创建存储过程             | eq     | false          | [4,5,6,_7_]  | 1    | procedure-create | 当前规则不允许创建存储过程。                                                       |
 | create-procedure-regexp         | 存储过程命名是否符合规范         | regexp | \^[_a-zA-Z_]+$ | [4,_5_,6,7]  | 2    | procedure-create | 新建存储过程使用的标识符"%s"不被规则允许，标识符需要满足正则"%s"。                 |
 | create-procedure-max-length     | 存储过程名允许的最大长度         | lte    | 32             | [4,_5_,6,7]  | 2    | procedure-create | 新建存储过程使用的标识符"%s"超过了规则允许的最长字符数限制，标识符最长不可超过%d。 |
-| create-procedure-db-exists      | 存储过程所属库是否存在           | eq     | tru e          | [4,_5_,6,7]  | 3    | procedure-create | 新建存储过程"%s"所在的库在实例"%s"中不存在。                                       |
+| create-procedure-db-exists      | 存储过程所属库是否存在           | eq     | true           | [4,_5_,6,7]  | 3    | procedure-create | 新建存储过程"%s"所在的库在实例"%s"中不存在。                                       |
 | create-procedure-exists         | 存储过程是否存在                 | eq     | false          | [4,_5_,6,7]  | 3    | procedure-create | 存储过程"%s"在实例"%s"的数据库"%s"中已存在。                                       |
 
 
@@ -392,13 +392,13 @@
 --- 
 | 规则名称                        | 规则说明                                   | 比较符 | 设定值 | 权限         | 层级 | 分组               | 错误信息                                                             |
 |---------------------------------|--------------------------------------------|--------|--------|--------------|------|--------------------|----------------------------------------------------------------------|
-| lock-table-enabled              | 是否允许lock table                         | eq     | true   | [4,_5_,6,7]  | 1    | no-allow-statement | 当前规则不允许执行LOCK TABLE命名。                                   |
-| flush-table-enabled             | 是否允许flush table                        | eq     | true   | [4,_5_,6,7]  | 1    | no-allow-statement | 当前规则不允许执行FLUSH TABLE命令。                                  |
-| truncate-table-enabled          | 是否允许truncat table                      | eq     | true   | [4,_5_,6,7]  | 1    | no-allow-statement | 当前规则不允许执行TRUNCATE TABLE命令。                               |
-| purge-binlog-enabled            | 是否允许purge binary                       | eq     | true   | [4,_5_,6,7]  | 1    | no-allow-statement | 当前规则不允许执行PURGE BINARY LOGS命令。                            |
-| purge-logs-enabled              | 是否允许purge log                          | eq     | true   | [4,_5_,6,7]  | 1    | no-allow-statement | 当前规则不允许执行PURGE LOGS命令。                                   |
-| unlock-tables-enabled           | 是否允许unlock table                       | eq     | true   | [4,_5_,6,7]  | 1    | no-allow-statement | 当前规则不允许执行UNLOCK TABLES命令。                                |
-| kill-enabled                    | 是否允许kill 线程                          | eq     | true   | [4,_5_,6,7]  | 1    | no-allow-statement | 当前规则不允许执行KILL命令。                                         |
+| lock-table-enabled              | 是否允许lock table                         | eq     | false  | [4,_5_,6,7]  | 1    | no-allow-statement | 当前规则不允许执行LOCK TABLE命名。                                   |
+| flush-table-enabled             | 是否允许flush table                        | eq     | false  | [4,_5_,6,7]  | 1    | no-allow-statement | 当前规则不允许执行FLUSH TABLE命令。                                  |
+| truncate-table-enabled          | 是否允许truncat table                      | eq     | false  | [4,_5_,6,7]  | 1    | no-allow-statement | 当前规则不允许执行TRUNCATE TABLE命令。                               |
+| purge-binlog-enabled            | 是否允许purge binary                       | eq     | false  | [4,_5_,6,7]  | 1    | no-allow-statement | 当前规则不允许执行PURGE BINARY LOGS命令。                            |
+| purge-logs-enabled              | 是否允许purge log                          | eq     | false  | [4,_5_,6,7]  | 1    | no-allow-statement | 当前规则不允许执行PURGE LOGS命令。                                   |
+| unlock-tables-enabled           | 是否允许unlock table                       | eq     | false  | [4,_5_,6,7]  | 1    | no-allow-statement | 当前规则不允许执行UNLOCK TABLES命令。                                |
+| kill-enabled                    | 是否允许kill 线程                          | eq     | false  | [4,_5_,6,7]  | 1    | no-allow-statement | 当前规则不允许执行KILL命令。                                         |
 | keyword-enable                  | 是否允许使用mysql 关键字                   | eq     | false  | [4,_5_,6,7]  | 1    | keyword            | 当前规则不允许使用保留关键字作为标识符。                             |
 | mixed-ddl-dml                   | 同一个工单里是否允许同时存在ddl、dml 语句  | eq     | true   | [4,_5_,6,7]  | 1    | mixed-ddl-dml      | 当前规则不允许在一个工单中同时出现DML和DDL操作，请分开多个工单提交。 |
 
