@@ -1,14 +1,16 @@
-CREATE TABLE IF NOT EXISTS `roles` (
-    `role_id`     INT UNSIGNED
+CREATE TABLE IF NOT EXISTS `glossaries` (
+    `catalog`     VARCHAR(25)
                   NOT NULL
-                  AUTO_INCREMENT
-                  COMMENT '自增主键',
-    `name`        VARCHAR(25)
+                  COMMENT '分类目录',
+    `iota`        TINYINT UNSIGNED
                   NOT NULL
-                  COMMENT '角色名称',
-    `description` VARCHAR(75)
+                  COMMENT '值枚举',
+    `name`        VARCHAR(50)
                   NOT NULL
-                  COMMENT '描述',
+                  COMMENT '值名称',
+    `description` VARCHAR(150)
+                  NOT NULL
+                  COMMENT '值描述',
     `version`     INT UNSIGNED
                   NOT NULL
                   COMMENT '版本',
@@ -17,11 +19,10 @@ CREATE TABLE IF NOT EXISTS `roles` (
     `create_at`   INT UNSIGNED
                   NOT NULL
                   COMMENT '创建时间',
-    PRIMARY KEY `pk_roles` (`role_id`),
-    UNIQUE KEY `unique_1` (`name`)
+    PRIMARY KEY `pk_glossaries` (`catalog`, `iota`)
 )
 ENGINE = InnoDB
-COMMENT = '角色表'
+COMMENT = '字典表'
 DEFAULT CHARSET = utf8mb4
 DEFAULT COLLATE = utf8mb4_general_ci;
 
