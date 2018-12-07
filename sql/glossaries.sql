@@ -26,7 +26,7 @@ COMMENT = '字典表'
 DEFAULT CHARSET = utf8mb4
 DEFAULT COLLATE = utf8mb4_general_ci;
 
-INSERT INTO mm_glossaries(catalog, iota, name, description, version, create_at) VALUES 
+INSERT INTO glossaries(catalog, iota, name, description, version, create_at) VALUES 
 ('data-types',  1, 'bit',        'TypeBit',        1, UNIX_TIMESTAMP()),
 ('data-types',  2, 'boolean',    'TypeBoolean',    1, UNIX_TIMESTAMP()),
 ('data-types',  3, 'tinyint',    'TypeTiny',       1, UNIX_TIMESTAMP()),
@@ -60,7 +60,7 @@ INSERT INTO mm_glossaries(catalog, iota, name, description, version, create_at) 
 ;
 
 
-INSERT INTO `mm_glossaries`(catalog, iota, name, description, version, create_at) VALUES 
+INSERT INTO `glossaries`(catalog, iota, name, description, version, create_at) VALUES 
 ('storage-engines',  1, 'InnoDB',    'The most widely used storage engine with transaction support',                                1, UNIX_TIMESTAMP()),
 ('storage-engines',  2, 'MyISAM',    'Non-transactional storage engine with good performance and small data footprint',             1, UNIX_TIMESTAMP()),
 ('storage-engines',  3, 'CSV',       'Works with files stored in CSV (comma-separated-values) format',                              1, UNIX_TIMESTAMP()),
@@ -75,7 +75,7 @@ INSERT INTO `mm_glossaries`(catalog, iota, name, description, version, create_at
 ;
 
 
-INSERT INTO `mm_glossaries`(catalog, iota, name, description, version, create_at) VALUES
+INSERT INTO `glossaries`(catalog, iota, name, description, version, create_at) VALUES
 ('rules.group',  1, 'database-create',  '...', 1, UNIX_TIMESTAMP()),
 ('rules.group',  2, 'database-alter',   '...', 1, UNIX_TIMESTAMP()),
 ('rules.group',  3, 'database-drop',    '...', 1, UNIX_TIMESTAMP()),
@@ -116,21 +116,21 @@ INSERT INTO `mm_glossaries`(catalog, iota, name, description, version, create_at
 ;
 
 
-INSERT INTO `mm_glossaries`(catalog, iota, name, description, version, create_at) VALUES
+INSERT INTO `glossaries`(catalog, iota, name, description, version, create_at) VALUES
 ('instances.status',  0, 'closed',  'The instance is closed for some reason', 1, UNIX_TIMESTAMP()), # 机器主动下线，可能是服务器调整等各种原因
 ('instances.status',  1, 'running',   'The instance is running', 1, UNIX_TIMESTAMP()),              # 正常服务中
-('instances.status',  1, 'suspected',   'The instance is suspected', 1, UNIX_TIMESTAMP())           # 可能是连接账号密码等问题
+('instances.status',  2, 'suspected',   'The instance is suspected', 1, UNIX_TIMESTAMP())           # 可能是连接账号密码等问题
 ;
 
 
-INSERT INTO `mm_glossaries`(catalog, iota, name, description, version, create_at) VALUES
+INSERT INTO `glossaries`(catalog, iota, name, description, version, create_at) VALUES
 ('users.status',  0, 'waiting-for-activation',  '...', 1, UNIX_TIMESTAMP()), # 等待激活
 ('users.status',  1, 'normal',   '...', 1, UNIX_TIMESTAMP()),                # 正常
-('users.status',  2, 'closed',   '...', 1, UNIX_TIMESTAMP()),                # 主动关闭，可能是职位调整或离职等原因
+('users.status',  2, 'closed',   '...', 1, UNIX_TIMESTAMP())                 # 主动关闭，可能是职位调整或离职等原因
 ;
 
 
-INSERT INTO mm_glossaries (catalog, iota, name, description, version, create_at) VALUES
+INSERT INTO glossaries (catalog, iota, name, description, version, create_at) VALUES
 ('charsets',  1, 'big5',     '', 1, UNIX_TIMESTAMP()),
 ('charsets',  2, 'dec8',     '', 1, UNIX_TIMESTAMP()),
 ('charsets',  3, 'cp850',    '', 1, UNIX_TIMESTAMP()),
@@ -174,7 +174,7 @@ INSERT INTO mm_glossaries (catalog, iota, name, description, version, create_at)
 ;
 
 
-INSERT INTO mm_glossaries (catalog, iota, name, description, version, create_at) VALUES
+INSERT INTO glossaries (catalog, iota, name, description, version, create_at) VALUES
 ('collations',   1, 'big5_chinese_ci',          '', 1, UNIX_TIMESTAMP()),
 ('collations',   2, 'latin2_czech_cs',          '', 1, UNIX_TIMESTAMP()),
 ('collations',   3, 'dec8_swedish_ci',          '', 1, UNIX_TIMESTAMP()),
@@ -397,23 +397,23 @@ INSERT INTO mm_glossaries (catalog, iota, name, description, version, create_at)
 ;
 
 
-INSERT INTO `mm_glossaries`(catalog, iota, name, description, version, create_at) VALUES
+INSERT INTO `glossaries`(catalog, iota, name, description, version, create_at) VALUES
 ('tickets.status',  0, 'pending',   '...', 1, UNIX_TIMESTAMP()), # 待处理
 ('tickets.status',  1, 'validated', '...', 1, UNIX_TIMESTAMP()), # 待处理
 ('tickets.status',  2, 'closed',    '...', 1, UNIX_TIMESTAMP())  # 待处理
 ;
 
 
-INSERT INTO `mm_glossaries`(catalog, iota, name, description, version, create_at) VALUES
+INSERT INTO `glossaries`(catalog, iota, name, description, version, create_at) VALUES
 ('statements.type',  1, 'DDL', 'Data Definition Language, refers to the CREATE, ALTER and DROP statements',                                            1, UNIX_TIMESTAMP()),
 ('statements.type',  2, 'DML', 'Data Manipulation Language, refers to the INSERT, UPDATE and DELETE statements',                                       1, UNIX_TIMESTAMP()),
 ('statements.type',  3, 'DQL', 'Data Query Language, refers to the SELECT, SHOW and HELP statements',                                                  1, UNIX_TIMESTAMP()),
-('statements.type',  3, 'DCL', 'Data Control Language, refers to the GRANT and REVOKE statements',                                                     1, UNIX_TIMESTAMP()),
-('statements.type',  3, 'DTL', 'Data Transaction Language, refers to the START TRANSACTION, SAVEPOINT, COMMIT and ROLLBACK [TO SAVEPOINT] statements', 1, UNIX_TIMESTAMP())
+('statements.type',  4, 'DCL', 'Data Control Language, refers to the GRANT and REVOKE statements',                                                     1, UNIX_TIMESTAMP()),
+('statements.type',  5, 'DTL', 'Data Transaction Language, refers to the START TRANSACTION, SAVEPOINT, COMMIT and ROLLBACK [TO SAVEPOINT] statements', 1, UNIX_TIMESTAMP())
 ;
 
 
-INSERT INTO `mm_glossaries`(catalog, iota, name, description, version, create_at) VALUES
+INSERT INTO `glossaries`(catalog, iota, name, description, version, create_at) VALUES
 ('relations.type',  1, '...', '...', 1, UNIX_TIMESTAMP())
 ;
 

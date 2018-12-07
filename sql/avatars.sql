@@ -22,7 +22,7 @@ COMMENT = '头像表'
 DEFAULT CHARSET = utf8mb4
 DEFAULT COLLATE = utf8mb4_general_ci;
 
-INSERT INTO `mm_avatars` (`url`, `version`, `create_at`) VALUES
+INSERT INTO `avatars` (`url`, `version`, `create_at`) VALUES
 ('/assets/images/avatars/01.png', 1, UNIX_TIMESTAMP()),
 ('/assets/images/avatars/02.png', 1, UNIX_TIMESTAMP()),
 ('/assets/images/avatars/03.png', 1, UNIX_TIMESTAMP()),

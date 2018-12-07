@@ -6,6 +6,12 @@ CREATE TABLE IF NOT EXISTS `comments` (
     `content`    TINYTEXT
                  NOT NULL
                  COMMENT '意见建议',
+    `owner_id`   INT UNSIGNED
+                 NOT NULL
+                 COMMENT '',
+    `ticket_id`  INT UNSIGNED
+                 NOT NULL
+                 COMMENT '',
     `version`    INT UNSIGNED
                  NOT NULL
                  COMMENT '版本',
